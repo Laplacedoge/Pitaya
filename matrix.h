@@ -2,6 +2,7 @@
 #define __MATRIX_H__
 
 #include <stdio.h>
+#include <string.h>
 #include <assert.h>
 
 typedef float matParam_t;               // 普通参数类型
@@ -34,7 +35,10 @@ void vMatSub(Mat *matL, Mat *matR, Mat *dst);
 void vMatSub_(Mat *matL, Mat *matR);
 void vMatDotMul(Mat *matL, Mat *matR, Mat *dst);
 void vMatDotMul_(Mat *matL, Mat *matR);
-void LDNet_MatMul(Mat *matL, Mat *matR, Mat *dst);
+void vMatMul(Mat *matL, Mat *matR, Mat *dst);
+
+void vMatTrs(Mat *mat, Mat *dst);
+// void vMatTrs_(Mat *mat);
 
 matParam_t vGetMatTotalMin(Mat *mat);
 matParam_t vGetMatTotalMax(Mat *mat);

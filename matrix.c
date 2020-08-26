@@ -225,7 +225,7 @@ void vMatDotMul_(Mat *matL, Mat *matR) {
  * @param matR  右矩阵
  * @param dst   存放结果的矩阵
  * */
-void LDNet_MatMul(Mat *matL, Mat *matR, Mat *dst) {
+void vMatMul(Mat *matL, Mat *matR, Mat *dst) {
 
     assert(matL->colNum == matR->rowNum);
     assert(matL != NULL && matR != NULL && dst != NULL);
@@ -264,9 +264,52 @@ void LDNet_MatMul(Mat *matL, Mat *matR, Mat *dst) {
     }
 }
 
-void vMatConv() {
+/*!
+ * @brief 矩阵转置
+ * @param mat   待转置矩阵
+ * @param dst   存放结果的矩阵
+ * */
+void vMatTrs(Mat *mat, Mat *dst) {
+    assert((mat->rowNum + mat->colNum) != 0 && mat != NULL && mat->base != NULL && dst != NULL && dst->base != NULL);
 
+    matMatEleNum_t totalEleNum = mat->rowNum * mat->colNum, tmp;
+    if(mat->rowNum == 1 || mat->colNum == 1) {
+        dst->rowNum = mat->colNum;
+        dst->colNum = mat->rowNum;
+        memcpy((void *)dst->base, (void *)mat->base, (int)(totalEleNum * 4));
+        return;
+    } else {
+        dst->rowNum = mat->colNum;
+        dst->colNum = mat->rowNum;
+        for(tmp = 0; tmp < totalEleNum; tmp++) {
+            *(dst->base + dst->colNum * (tmp % mat->colNum) + (tmp / mat->colNum)) = *(mat->base + tmp);
+        }
+    }
 }
+
+// void vMatTrs_(Mat *mat) {
+//     assert((mat->rowNum + mat->colNum) != 0 && mat != NULL && mat->base != NULL);
+
+//     matMatSize_t matSizeSwap;
+//     matParam_t matParamSwap;
+//     matMatEleNum_t totalEleNum = mat->rowNum * mat->colNum, row, col;
+
+//     matSizeSwap = mat->colNum;
+//     mat->colNum = mat->rowNum;
+//     mat->rowNum = matSizeSwap;
+//     if(mat->rowNum == 1 || mat->colNum == 1) return;
+//     else {
+//         for(row = 0; row < ) {
+//             for() {
+
+//             }
+//         }
+//     }
+// }
+
+// void vMatConv() {
+
+// }
 
 /*!
  * @brief 获取矩阵的唯一最小值
