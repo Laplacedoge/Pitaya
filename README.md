@@ -6,7 +6,7 @@ A matrix operations lib for embedded platform in C.
   - 2D matrix addition, subtraction, multiplication and hadamard product.
   - 2D matrix transpose.
 - Common activation functions.
-  - ReLU.
+  - ReLU, Leaky ReLU.
 
 ## About git​ :eyes:
 - git init current dir: `git init`
