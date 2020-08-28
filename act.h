@@ -7,6 +7,10 @@
 void vActReLU(Mat *mat, Mat *dst);
 void vActReLU_(Mat *mat);
 
+#define actLEAKYRELU_ALPHA 0.01F
+void vActLeakyReLU(Mat *mat, Mat *dst);
+void vActLeakyReLU_(Mat *mat);
+
 #endif
 
 
